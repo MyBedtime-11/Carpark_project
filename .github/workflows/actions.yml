@@ -23,7 +23,7 @@ jobs:
           pip install -r requirements.txt
           
       - name: Extract data
-        run: python extract.py
+        run: python Extract.py
 
       - name: Load data to MySQL
         env:
@@ -31,7 +31,7 @@ jobs:
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASS: ${{ secrets.DB_PASS }}
           DB_NAME: ${{ secrets.DB_NAME }}
-        run: python load.py
+        run: python Load.py
 
       - name: Transform data
         env:
@@ -39,4 +39,4 @@ jobs:
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASS: ${{ secrets.DB_PASS }}
           DB_NAME: ${{ secrets.DB_NAME }}
-        run: python transform.py
+        run: python Transform.py
