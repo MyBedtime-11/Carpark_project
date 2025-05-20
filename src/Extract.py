@@ -17,11 +17,20 @@ def process_carpark_data():
         data = respnse.json()
         print("Data retrieved successfully.")
 
-        # Define the file path and folder path
-        # Separating makes it possible to go through the folder to delete old records
-        folderpath = r"C:\Users\Guo Xiang\OneDrive\Pictures\Documents\Analyst Course\Data Pipeline"
+        # Create a folder to store the data
+        folderpath = os.path.join(os.getcwd(), "data")
+        if not os.path.exists(folderpath):
+            os.mkdir(folderpath)
+
+        # Define the file path
         filename = f"carpark_data_{date_str}.csv"
         filepath = os.path.join(folderpath, filename)
+
+        # Define the file path and folder path
+        # Separating makes it possible to go through the folder to delete old records
+        # folderpath = r"C:\Users\Guo Xiang\OneDrive\Pictures\Documents\Analyst Course\Data Pipeline"
+        # filename = f"carpark_data_{date_str}.csv"
+        # filepath = os.path.join(folderpath, filename)
 
         # Get the timestamp for the data collected
         timestamp = data["items"][0]["timestamp"]

@@ -8,6 +8,7 @@ load_dotenv()
 table_name = "carpark_staging"
 
 
+# Delete records older than 1 day
 def delete_old_records(conn):
     yesterday = datetime.now() - timedelta(days=1)
     date_str = yesterday.strftime("%Y-%m-%d")
@@ -78,9 +79,11 @@ def main():
     today = datetime.today()
     date_str = today.strftime("%Y-%m-%d_%H")
 
-    # folderpath = r"C:\Users\Guo Xiang\OneDrive\Pictures\Documents\Analyst Course\Data Pipeline"
-    # filename = f"carpark_data_{date_str}.csv"
-    file_path = rf"C:\\Users\\Guo Xiang\\OneDrive\\Pictures\\Documents\\Analyst Course\\Data Pipeline\\carpark_data_{date_str}.csv"
+    # Construct the file path
+    filename = f"carpark_data_{date_str}.csv"
+    folder_path = os.path.join(os.getcwd(), "data")
+    file_path = os.path.join(folder_path, filename).replace("\\", "/")
+    # file_path = rf"C:\\Users\\Guo Xiang\\OneDrive\\Pictures\\Documents\\Analyst Course\\Data Pipeline\\carpark_data_{date_str}.csv"
 
     try:
         create_table_if_not_exists(conn, file_path)
