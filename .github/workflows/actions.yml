@@ -24,9 +24,11 @@ jobs:
           pip install -r requirements.txt
           
       - name: Extract data
+        working-directory: ./src  
         run: python Extract.py
 
       - name: Load data to MySQL
+        working-directory: ./src
         env:
           DB_HOST: ${{ secrets.DB_HOST }}
           DB_USER: ${{ secrets.DB_USER }}
@@ -35,6 +37,7 @@ jobs:
         run: python Load.py
 
       - name: Transform data
+        working-directory: ./src
         env:
           DB_HOST: ${{ secrets.DB_HOST }}
           DB_USER: ${{ secrets.DB_USER }}
